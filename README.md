@@ -49,13 +49,12 @@ Sample Command: monkey -p com.jg.spongeminds.preschooldemo  -v 1050 -s 42 ; ./si
 Notes: 
 * Always include the full package name after --app. 
 * The process ID and thread options tend to be unreliable. You can use -a to generalize event counting. 
-
-⋅⋅* Add --csv to make sure the output file is in a comma separated form. Excluding it will allow you to read the data, but not manipulate it easily.
-⋅⋅* For the events list, when listing multiple events, simpleperf requires the name is be exactly as it was shown in the output of ./simpleperf list. Additionally, there cannot be any spaces and there must be a comma between events. 
-⋅⋅* Note that using -e $(cat events.txt) works so long as the text file follows the same guidelines. 
-⋅⋅* Measuring more than six events at a time results in multiplexing and should be avoided. 
-⋅⋅* You can use --group instead of -e to sync event monitoring.
-⋅⋅* Optionally, include --duration for simpleperf to run only at a specified amount of seconds. Excluding this would require a manual exit (CTRL-C). 
-⋅⋅* Including --interval prints statistics every specified amount of milliseconds. While using this option results in a larger output file, it facilitates detecting possible multiplexing. 
-⋅⋅* Note that if you use this option, only the very last counts for each event will matter in the output file. 
-⋅⋅* If you do not choose a file name after -o, it will output all the results to perf.data. 
+* Add --csv to make sure the output file is in a comma separated form. Excluding it will allow you to read the data, but not manipulate it easily.
+* For the events list, when listing multiple events, simpleperf requires the name is be exactly as it was shown in the output of ./simpleperf list. Additionally, there cannot be any spaces and there must be a comma between events. 
+* Note that using -e $(cat events.txt) works so long as the text file follows the same guidelines. 
+* Measuring more than six events at a time results in multiplexing and should be avoided. 
+* You can use --group instead of -e to sync event monitoring.
+* Optionally, include --duration for simpleperf to run only at a specified amount of seconds. Excluding this would require a manual exit (CTRL-C). 
+* Including --interval prints statistics every specified amount of milliseconds. While using this option results in a larger output file, it facilitates detecting possible multiplexing. 
+* Note that if you use this option, only the very last counts for each event will matter in the output file. 
+* If you do not choose a file name after -o, it will output all the results to perf.data. 
