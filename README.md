@@ -48,7 +48,9 @@ Sample Command: monkey -p com.jg.spongeminds.preschooldemo  -v 1050 -s 42 ; ./si
 
 Notes: 
 ⋅⋅* Always include the full package name after --app. 
+
 ⋅⋅* The process ID and thread options tend to be unreliable. You can use -a to generalize event counting. 
+
 ⋅⋅* Add --csv to make sure the output file is in a comma separated form. Excluding it will allow you to read the data, but not manipulate it easily.
 ⋅⋅* For the events list, when listing multiple events, simpleperf requires the name is be exactly as it was shown in the output of ./simpleperf list. Additionally, there cannot be any spaces and there must be a comma between events. 
 ⋅⋅* Note that using -e $(cat events.txt) works so long as the text file follows the same guidelines. 
