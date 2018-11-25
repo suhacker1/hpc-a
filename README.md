@@ -47,9 +47,8 @@ In order to run HPCA, you must create and utilize a dataset with the HPC profile
 Sample Command: monkey -p com.jg.spongeminds.preschooldemo  -v 1050 -s 42 ; ./simpleperf stat --app com.jg.spongeminds.preschooldemo --csv -e L1-icache-load-misses,LLC-loads,LLC-load-misses,LLC-stores,LLC-store-misses --duration 30 --interval 50 -o test/com.jg.spongeminds.preschooldemo_set2.csv
 
 Notes: 
-⋅⋅* Always include the full package name after --app. 
-
-⋅⋅* The process ID and thread options tend to be unreliable. You can use -a to generalize event counting. 
+* Always include the full package name after --app. 
+* The process ID and thread options tend to be unreliable. You can use -a to generalize event counting. 
 
 ⋅⋅* Add --csv to make sure the output file is in a comma separated form. Excluding it will allow you to read the data, but not manipulate it easily.
 ⋅⋅* For the events list, when listing multiple events, simpleperf requires the name is be exactly as it was shown in the output of ./simpleperf list. Additionally, there cannot be any spaces and there must be a comma between events. 
