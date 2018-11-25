@@ -38,7 +38,7 @@ In order to run HPCA, you must create and utilize a dataset with the HPC profile
 ### Gathering Pertinent Information
 1. Run ./simpleperf list for all supported events. 
 2. Run ./simpleperf list hw for all supported hardware events. 
-3. Create a list of all the events you want to test and split them into sets of 5 (or another number depending on your processor). 
+3. Create a list of all the events you want to test and split them into sets of 5 (or another number depending on your processor). Edit event_list_prep.py as needed. 
 
 ### Obtaining Profiling Data
 1. Ensure monkey works. 
