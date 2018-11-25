@@ -45,6 +45,7 @@ In order to run HPCA, you must create and utilize a dataset with the HPC profile
 2. Set a constant seed and duration value. 
 3. Use the stat command for each event set.
 Sample Command: monkey -p com.jg.spongeminds.preschooldemo  -v 1050 -s 42 ; ./simpleperf stat --app com.jg.spongeminds.preschooldemo --csv -e L1-icache-load-misses,LLC-loads,LLC-load-misses,LLC-stores,LLC-store-misses --duration 30 --interval 50 -o test/com.jg.spongeminds.preschooldemo_set2.csv
+
 Notes: 
 ⋅⋅* Always include the full package name after --app. 
 ⋅⋅* The process ID and thread options tend to be unreliable. You can use -a to generalize event counting. 
