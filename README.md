@@ -38,18 +38,22 @@ In order to run HPCA, you must create and utilize a dataset with the HPC profile
 ### Gathering Pertinent Information
 1. Run ./simpleperf list for all supported events. 
 2. Run ./simpleperf list hw for all supported hardware events. 
+3. Create a list of all the events you want to test and split them into sets of 5 (or another number depending on your processor). 
 
 ### Obtaining Profiling Data
-1. Use the stat command to obtain event counts.
-Sample Command: ./simpleperf stat --app com.rovio.angrybirds --csv -e cpu-cycles,branch-misses --duration 20 --interval 50 -o trial.data
-2. Always include the full package name after --app. 
-The process ID and thread options tend to be unreliable. You can use -a to generalize event counting. 
-3. Add --csv to make sure the output file is in a comma separated form. Excluding it will allow you to read the data, but not manipulate it easily.
-4. For the events list, when listing multiple events, simpleperf requires the name is be exactly as it was shown in the output of ./simpleperf list. Additionally, there cannot be any spaces and there must be a comma between events. 
-Note that using -e $(cat events.txt) works so long as the text file follows the same guidelines. 
-Measuring more than six events at a time results in multiplexing and should be avoided. 
-You can use --group instead of -e to sync event monitoring.
-5. Optionally, include --duration for simpleperf to run only at a specified amount of seconds. Excluding this would require a manual exit (CTRL-C). 
-6. Including --interval prints statistics every specified amount of milliseconds. While using this option results in a larger output file, it facilitates detecting possible multiplexing. 
-Note that if you use this option, only the very last counts for each event will matter in the output file. 
-7. If you do not choose a file name after -o, it will output all the results to perf.data. 
+1. Ensure monkey works. 
+2. Set a constant seed and duration value. 
+3. Use the stat command for each event set.
+Sample Command: monkey -p com.jg.spongeminds.preschooldemo  -v 1050 -s 42 ; ./simpleperf stat --app com.jg.spongeminds.preschooldemo --csv -e L1-icache-load-misses,LLC-loads,LLC-load-misses,LLC-stores,LLC-store-misses --duration 30 --interval 50 -o test/com.jg.spongeminds.preschooldemo_set2.csv
+Notes: 
+⋅⋅* Always include the full package name after --app. 
+⋅⋅* The process ID and thread options tend to be unreliable. You can use -a to generalize event counting. 
+⋅⋅* Add --csv to make sure the output file is in a comma separated form. Excluding it will allow you to read the data, but not manipulate it easily.
+⋅⋅* For the events list, when listing multiple events, simpleperf requires the name is be exactly as it was shown in the output of ./simpleperf list. Additionally, there cannot be any spaces and there must be a comma between events. 
+⋅⋅* Note that using -e $(cat events.txt) works so long as the text file follows the same guidelines. 
+⋅⋅* Measuring more than six events at a time results in multiplexing and should be avoided. 
+⋅⋅* You can use --group instead of -e to sync event monitoring.
+⋅⋅* Optionally, include --duration for simpleperf to run only at a specified amount of seconds. Excluding this would require a manual exit (CTRL-C). 
+⋅⋅* Including --interval prints statistics every specified amount of milliseconds. While using this option results in a larger output file, it facilitates detecting possible multiplexing. 
+⋅⋅* Note that if you use this option, only the very last counts for each event will matter in the output file. 
+⋅⋅* If you do not choose a file name after -o, it will output all the results to perf.data. 
