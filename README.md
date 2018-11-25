@@ -12,4 +12,44 @@ In order to run HPCA, you must create and utilize a dataset with the HPC profile
 5. Copy the guide_to_reading_coppa_compliance_status_data for the app.
 6. For each feature, replace the violation with a 1 or a 0 if it does or does not exist, respectively. This represents the y vector for the app. 
 
-### Profiling 
+### Simpleperf Download
+1. Download Android Studio and any necessary dependencies. 
+2. Open Android Studio. 
+3. Press the gear at the bottom right to enter configuration settings. 
+4. Choose ‘SDK Manager’.
+5. Choose ‘SDK Tools’. 
+6. Click on the boxes for ‘Android SDK Tools’ and ‘NDK’. Change the location above the list to set your path. 
+7. Press apply to begin installation of components. 
+8. Press Finish when done. 
+
+### Setting up Simpleperf through ADB Shell 
+1. Go to the Android SDK location (set during component installation). 
+2. Locate the platform-tools folder and set it as your path. 
+3. Connect your device with an USB, ensuring that Developer Options and USB Debugging are enabled. 
+4. Run “adb devices” to check if your device is properly connected. 
+5. Return to the SDK location.
+6. Enter ndk-bundle/simpleperf/bin/android/arm to locate the simpleperf binary. 
+7. Push the simpleperf binary to the same folder as the adb binary. 
+8. Run “adb push simpleperf data/local/tmp” to push the binary onto the device. 
+9. Use “adb shell” followed by “su” to enter the shell and establish root privilege. 
+10. Set path as /data/local/tmp. 
+11. Run ./simpleperf to make sure it works. 
+
+### Gathering Pertinent Information
+1. Run ./simpleperf list for all supported events. 
+2. Run ./simpleperf list hw for all supported hardware events. 
+
+### Obtaining Profiling Data
+1. Use the stat command to obtain event counts.
+Sample Command: ./simpleperf stat --app com.rovio.angrybirds --csv -e cpu-cycles,branch-misses --duration 20 --interval 50 -o trial.data
+2. Always include the full package name after --app. 
+The process ID and thread options tend to be unreliable. You can use -a to generalize event counting. 
+3. Add --csv to make sure the output file is in a comma separated form. Excluding it will allow you to read the data, but not manipulate it easily.
+4. For the events list, when listing multiple events, simpleperf requires the name is be exactly as it was shown in the output of ./simpleperf list. Additionally, there cannot be any spaces and there must be a comma between events. 
+Note that using -e $(cat events.txt) works so long as the text file follows the same guidelines. 
+Measuring more than six events at a time results in multiplexing and should be avoided. 
+You can use --group instead of -e to sync event monitoring.
+5. Optionally, include --duration for simpleperf to run only at a specified amount of seconds. Excluding this would require a manual exit (CTRL-C). 
+6. Including --interval prints statistics every specified amount of milliseconds. While using this option results in a larger output file, it facilitates detecting possible multiplexing. 
+Note that if you use this option, only the very last counts for each event will matter in the output file. 
+7. If you do not choose a file name after -o, it will output all the results to perf.data. 
