@@ -3,6 +3,10 @@
 In order to run HPCA, you must create and utilize a dataset with the HPC profile and COPPA label of each app. The tools necessary for data collection are: 
 1. Python 2.7 or higher 
 2. [Play_scraper](https://pypi.org/project/play_scraper/)
+3. re
+4. Android Studio with SDK and NDK (simpleperf, monkey) 
+
+[Here is a video that explains the data collection process.](https://youtu.be/d6rhO7dSV70)
 
 ### App Selection and COPPA Label Extraction
 1. Edit and run scraper_for_app_list.py, replacing the dummy values with your chosen values for app amount and age ranges. This will create the app list. 
