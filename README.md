@@ -1,6 +1,6 @@
-# HPCA: HPC-based COPPA violations Analyzer
+# COPPTCHA: COPPA Tracking by Checking Hardware-level Activity
 ## Data Collection
-In order to run HPCA, you must create and utilize a dataset with the HPC profile and COPPA label of each app. The tools necessary for data collection are: 
+In order to run COPPTCHA, you must create and utilize a dataset with the HPC profile and COPPA label of each app. The tools necessary for data collection are: 
 1. Python 2.7 or higher 
 2. [Play_scraper](https://pypi.org/project/play_scraper/)
 3. re
